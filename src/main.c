@@ -1,6 +1,93 @@
 #include <stdio.h>
 
-int main() {
+float calcularValorBase(float distancia) {
+    float valorBase;
+
+    if (distancia > 0 && distancia <= 5) {
+        valorBase = 8;
+    } else if (distancia > 5 && distancia <= 15) {
+        valorBase = 12;
+    } else if (distancia > 15 && distancia <= 30) {
+        valorBase = 18;
+    } else {
+        valorBase = 25;
+    }
+
+    return valorBase;
+}
+
+float calcularAdicionalPeso(float peso,  float subtotalInicial) {
+    float adicionalPeso;
+
+    if (peso > 0 && peso <= 2) {
+        adicionalPeso = 0;
+
+    } else if (peso > 2 && peso <= 5) {
+        adicionalPeso = subtotalInicial * 0.05;
+
+    } else if (peso > 5 && peso <= 10) {
+        adicionalPeso = subtotalInicial * 0.10;
+
+    } else if (peso > 10) {
+        adicionalPeso = subtotalInicial * 0.20;
+    }  
+
+    return adicionalPeso;
+}
+
+float calcularAdicionalModalidade(int modalidade,  float subtotalInicial) {
+    float adicionalModalidade;
+
+    if (modalidade == 1) {
+        adicionalModalidade = 0;
+    } else if (modalidade == 2) {
+        adicionalModalidade = subtotalInicial * 0.15;
+    } else if (modalidade == 3) {
+        adicionalModalidade = subtotalInicial * 0.3;
+    }
+
+    return adicionalModalidade;
+}
+
+float calcularAdicionalProtecao(int servicoProtecao) {
+    float adicionalProtecao;
+
+    if (servicoProtecao == 0) {
+        adicionalProtecao = 0;
+    } else if (servicoProtecao == 1) {
+        adicionalProtecao = 7.50;
+    }
+
+    return adicionalProtecao;
+}
+
+float calcularAdicionalTentativas(int tentativasEntrega) {
+    float adicionalTentativas;
+
+        if (tentativasEntrega == 0) {
+            adicionalTentativas = 0;
+        } else if (tentativasEntrega >= 1) {
+            adicionalTentativas = (tentativasEntrega * 4);
+        }
+
+    return adicionalTentativas;
+}
+
+float calcularQuantidadeModalidades(int tentativasEntrega) {
+    float adicionalTentativas;
+
+        if (tentativasEntrega == 0) {
+            adicionalTentativas = 0;
+        } else if (tentativasEntrega >= 1) {
+            adicionalTentativas = (tentativasEntrega * 4);
+        }
+
+    return adicionalTentativas;
+}
+
+//FUNCAO PRINCIPAL====================================================
+
+int main(void) {
     int continuarLoop;
     int modalidade;
     int tentativasEntrega;
@@ -25,7 +112,6 @@ int main() {
         //dados======================
 
         do {
-        
             printf("Digite a distancia da entrega (em Km): ");
             scanf("%f", &distancia);
 
@@ -86,60 +172,19 @@ int main() {
 
         } while (tentativasEntrega < 0);
 
-        //processamento======================
+        //processamento================================================================
 
-        //distancia
-        if (distancia > 0 && distancia <= 5) {
-            baseDistancia = 8;
-
-        } else if (distancia > 5 && distancia <= 15) {
-            baseDistancia = 12;
-            
-        } else if (distancia > 15 && distancia <= 30) {
-            baseDistancia = 18;
-            
-        } else if (distancia > 30) {
-            baseDistancia = 25;
-        }
+        baseDistancia = calcularValorBase(distancia);
 
         subtotalInicial = baseDistancia + (distancia * 1.20);
 
-        //peso
-        if (peso > 0 && peso <= 2) {
-            adicionalPeso = 0;
+        adicionalPeso = calcularAdicionalPeso(peso, subtotalInicial);
 
-        } else if (peso > 2 && peso <= 5) {
-            adicionalPeso = subtotalInicial * 0.05;
+        adicionalModalidade = calcularAdicionalModalidade(modalidade, subtotalInicial);
 
-        } else if (peso > 5 && peso <= 10) {
-            adicionalPeso = subtotalInicial * 0.10;
+        adicionalProtecao = calcularAdicionalProtecao(servicoProtecao);
 
-        } else if (peso > 10) {
-            adicionalPeso = subtotalInicial * 0.20;
-        }  
-
-        //modalidade
-        if (modalidade == 1) {
-            adicionalModalidade = 0;
-        } else if (modalidade == 2) {
-            adicionalModalidade = subtotalInicial * 0.15;
-        } else if (modalidade == 3) {
-            adicionalModalidade = subtotalInicial * 0.3;
-        }
-
-        //protecao
-        if (servicoProtecao == 0) {
-            adicionalProtecao = 0;
-        } else if (servicoProtecao == 1) {
-            adicionalProtecao = 7.50;
-        }
-
-        //tentativas
-        if (tentativasEntrega == 0) {
-            adicionalTentativas = 0;
-        } else if (tentativasEntrega >= 1) {
-            adicionalTentativas = (tentativasEntrega * 4);
-        }
+        adicionalTentativas = calcularAdicionalTentativas(tentativasEntrega);
 
         subtotal = subtotalInicial + adicionalModalidade + adicionalPeso + adicionalProtecao + adicionalTentativas; 
         printf("%.2f", subtotal);
