@@ -1,4 +1,5 @@
 main.dSYM/
 src/main.dSYM/
+.vscode/
 main
 *.o
