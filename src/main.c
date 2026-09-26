@@ -14,6 +14,10 @@ int main() {
     float adicionalProtecao;
     float adicionalTentativas;
     float subtotal;
+    int totalEntregas = 0;
+    float valorTotalSessao = 0;
+    int qtdEconomica = 0, qtdExpressa = 0, qtdPrioritaria = 0;
+    float maiorValor = 0, menorValor = 0;
 
     do {
         printf("\n===== ENTREGA =====\n\n");
@@ -139,10 +143,32 @@ int main() {
 
         subtotal = subtotalInicial + adicionalModalidade + adicionalPeso + adicionalProtecao + adicionalTentativas; 
         printf("%.2f", subtotal);
+
+        totalEntregas++;
+        valorTotalSessao += subtotal;
+
+        if (modalidade == 1) qtdEconomica++;
+        else if (modalidade == 2) qtdExpressa++;
+        else if (modalidade == 3) qtdPrioritaria++;
+
+        if (totalEntregas == 1) {
+            maiorValor = subtotal;
+            menorValor = subtotal;
+
+        } else if (subtotal > maiorValor) {
+            maiorValor = subtotal;
+
+        } else if (subtotal < menorValor) {
+            menorValor = subtotal;
+        }
+
+        printf("\n\n===============================");
+        printf("\n\nValor desta entrega: R$ %.2f\n", subtotal);
+        printf("\n===============================");
         
         do {
             
-            printf("\nQuer continuar com o loop? 1 - Sim ; 0 - Nao: ");
+            printf("\nQuer continuar com o loop?\n0 - Nao:\n1 - Sim\n\nDigite sua opcao: ");
             scanf("%d", &continuarLoop);
 
             if (continuarLoop != 0 && continuarLoop != 1) {
@@ -154,7 +180,15 @@ int main() {
     } while (continuarLoop == 1); 
 
 
-    printf("Fim");
+    printf("\n===== RESUMO DA SESSAO =====\n\n");
+    printf("Total de entregas: %d\n", totalEntregas);
+    printf("Valor total: R$ %.2f\n", valorTotalSessao);
+    printf("Valor medio: R$ %.2f\n", valorTotalSessao / totalEntregas);
+    printf("Entregas Economicas: %d\n", qtdEconomica);
+    printf("Entregas Expressas: %d\n", qtdExpressa);
+    printf("Entregas Prioritarias: %d\n", qtdPrioritaria);
+    printf("Maior valor: R$ %.2f\n", maiorValor);
+    printf("Menor valor: R$ %.2f\n", menorValor);
 
 
     return 0;
