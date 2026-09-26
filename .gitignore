@@ -1,0 +1,4 @@
+main.dSYM/
+src/main.dSYM/
+main
+*.o
