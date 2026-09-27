@@ -73,17 +73,6 @@ float calcularAdicionalTentativas(int tentativasEntrega) {
     return adicionalTentativas;
 }
 
-float calcularQuantidadeModalidades(int tentativasEntrega) {
-    float adicionalTentativas;
-
-        if (tentativasEntrega == 0) {
-            adicionalTentativas = 0;
-        } else if (tentativasEntrega >= 1) {
-            adicionalTentativas = (tentativasEntrega * 4);
-        }
-
-    return adicionalTentativas;
-}
 
 //FUNCAO PRINCIPAL====================================================
 
@@ -116,7 +105,7 @@ int main(void) {
             scanf("%f", &distancia);
 
             if (distancia <= 0) {
-                printf("\nOpcao invalida! Digite novamente.\n");
+                printf("\nOpcao invalida! Digite novamente.\n\n");
             }
 
         } while (distancia <= 0);
@@ -187,7 +176,6 @@ int main(void) {
         adicionalTentativas = calcularAdicionalTentativas(tentativasEntrega);
 
         subtotal = subtotalInicial + adicionalModalidade + adicionalPeso + adicionalProtecao + adicionalTentativas; 
-        printf("%.2f", subtotal);
 
         totalEntregas++;
         valorTotalSessao += subtotal;
@@ -213,11 +201,11 @@ int main(void) {
         
         do {
             
-            printf("\nQuer continuar com o loop?\n0 - Nao:\n1 - Sim\n\nDigite sua opcao: ");
+            printf("\n\nQuer continuar com o loop?\n0 - Nao\n1 - Sim\n\nDigite sua opcao: ");
             scanf("%d", &continuarLoop);
 
             if (continuarLoop != 0 && continuarLoop != 1) {
-                printf("Opcao invalida! Digite novamente.\n");
+                printf("Opcao invalida! Digite novamente.\n\n");
             }
 
         } while (continuarLoop != 0 && continuarLoop != 1);
